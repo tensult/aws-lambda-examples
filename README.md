@@ -32,6 +32,17 @@ You can use following sample input:
   "query": "show tables"
 }
 ```
+#### Using with DB Endpoint param
+You can use following sample input:
+```json
+{
+  "username": "tensultdbuser",
+  "password": "password",
+  "endpoint": "<rds-endpoint>",
+  "dbname": "testdb",
+  "query": "show tables"
+}
+```
 #### Using with IAM account
 You can use following sample input:
 ```json
