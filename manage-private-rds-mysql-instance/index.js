@@ -17,10 +17,10 @@ function getRDSIAMToken(dbUsername) {
     });
 }
 
-function executeQuery(username, password, dbname, query, callback) {
+function executeQuery(endpoint, username, password, dbname, query, callback) {
     const rdsPassword = password || getRDSIAMToken(username);
     const connection = mysql.createConnection({
-        host: rdsDBEndpoint,
+        host: endpoint,
         port: dbPort,
         user: username,
         password: rdsPassword,
@@ -58,8 +58,8 @@ exports.handler = (event, context, callback) => {
     if (!event.dbname && !process.env.RDS_MYSQL_DBNAME) {
         return callback('dbname is required');
     }
-    if (!rdsDBEndpoint) {
+    if (!rdsDBEndpoint && !event.endpoint) {
         return callback('environment variable RDS_MYSQL_ENDPONT is required');
     }
-    executeQuery(event.username, event.password, event.dbname || process.env.RDS_MYSQL_DBNAME, event.query, callback);
+    executeQuery(event.endpoint || rdsDBEndpoint, event.username, event.password, event.dbname || process.env.RDS_MYSQL_DBNAME, event.query, callback);
 };
