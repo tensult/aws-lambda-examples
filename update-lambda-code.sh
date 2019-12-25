@@ -2,9 +2,6 @@
 
 # This only updates an existing lambda function so before running this first create the function.
 
-aws_key_id="AKIAUW3WUZOTPG5Z3ZOB"
-aws_secret_key="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"
-
 for i in "$@"
 do
 case $i in
